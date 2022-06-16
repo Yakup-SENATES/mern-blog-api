@@ -7,6 +7,7 @@ const userRoot = require("./routes/users");
 const postRoot = require("./routes/posts");
 const categoryRoot = require("./routes/categories");
 const multer = require("multer");
+const cors = require('cors')
 
 dotenv.config();
 
@@ -40,5 +41,7 @@ app.use("/api/posts", postRoot);
 app.use("/api/categories", categoryRoot);
 
 app.listen(5000, () => {
-  console.log("Server started on port 5000");
+  console.log("Backend is running");
 });
+
+app.use(cors())
