@@ -8,6 +8,10 @@ const postRoot = require("./routes/posts");
 const categoryRoot = require("./routes/categories");
 const multer = require("multer");
 
+const cors = require("cors");
+
+app.use(cors());
+
 dotenv.config();
 
 app.use(express.json());
