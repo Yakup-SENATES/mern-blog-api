@@ -10,12 +10,12 @@ const multer = require("multer");
 const cors = require("cors");
 
 app.use(cors());
-
 dotenv.config();
 
 app.use(express.json());
+
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL) 
   .then(console.log("connected to mongoDB"))
   .catch((err) => console.log(err));
 

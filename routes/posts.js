@@ -45,12 +45,13 @@ router.delete("/:id", async (req, res) => {
       } catch (err) {
         res.status(500).json(err);
       }
-    } else res.status(401).json("You can delete only your posts!");
+    } else {
+      res.status(401).json("You can delete only your post!");
+    }
   } catch (err) {
-    res.status(404).json("Post not found!");
+    res.status(500).json(err);
   }
 });
-
 //Get Posts
 router.get("/:id", async (req, res) => {
   try {
