@@ -21,9 +21,9 @@ router.put("/:id", async (req, res) => {
         },
         { new: true }
       );
-      res.status(200).json(updateUser);
+      return res.status(200).json(updateUser);
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   }
 });
@@ -37,15 +37,15 @@ router.delete("/:id", async (req, res) => {
       try {
         await Post.deleteMany({ userName: user.userName });
         await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("User has been deleted...");
+        return res.status(200).json("User has been deleted...");
       } catch (err) {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       }
     } catch (err) {
-      res.status(404).json("User not found!");
+      return res.status(404).json("User not found!");
     }
   } else {
-    res.status(401).json("You can delete only your account!");
+    return res.status(401).json("You can delete only your account!");
   }
 });
 
@@ -54,9 +54,9 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    return res.status(200).json(others);
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 });
 

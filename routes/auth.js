@@ -28,7 +28,7 @@ router.post("/register", async (req, res) => {
       .send({ message: "An email sent to your mail. Please Verify..." })
       .json(user);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 //LOGIN
@@ -55,9 +55,9 @@ router.post("/login", async (req, res) => {
         .send({ message: "An email sent to your mail. Please Verify..." });
     }
     const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    return res.status(200).json(others);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 
@@ -75,9 +75,9 @@ router.get("/id:/verify/:token", async (req, res) => {
     if (!token) return res.status(400).send({ message: "Token bulunamadı!" });
     await User.updateOne({ _id: user._id }, { verified: true });
     await token.remove();
-    res.status(200).send({ message: "Email doğrulandı!" });
+    return res.status(200).send({ message: "Email doğrulandı!" });
   } catch (error) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 
