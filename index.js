@@ -3,20 +3,26 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
-const userRoot = require("./routes/users");
-const postRoot = require("./routes/posts");
-const categoryRoot = require("./routes/categories");
+const userRoute = require("./routes/users");
+const postRoute = require("./routes/posts");
+const categoryRoute = require("./routes/categories");
 const multer = require("multer");
+const cors = require("cors");
 
+<<<<<<< HEAD
 const cors = require("cors");
 
 app.use(cors());
 
+=======
+app.use(cors());
+>>>>>>> d1b36782a8f41620abc8ff33bea643d47fd1b679
 dotenv.config();
 
 app.use(express.json());
+
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL) 
   .then(console.log("connected to mongoDB"))
   .catch((err) => console.log(err));
 
@@ -39,10 +45,10 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 app.use("/api/auth", authRoute);
-app.use("/api/users", userRoot);
-app.use("/api/posts", postRoot);
-app.use("/api/categories", categoryRoot);
+app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);
+app.use("/api/categories", categoryRoute);
 
 app.listen(5000, () => {
-  console.log("Server started on port 5000");
+  console.log("Backend is running");
 });
