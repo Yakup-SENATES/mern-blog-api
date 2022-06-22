@@ -9,20 +9,14 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const cors = require("cors");
 
-<<<<<<< HEAD
-const cors = require("cors");
-
 app.use(cors());
 
-=======
-app.use(cors());
->>>>>>> d1b36782a8f41620abc8ff33bea643d47fd1b679
 dotenv.config();
 
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGO_URL) 
+  .connect(process.env.MONGO_URL)
   .then(console.log("connected to mongoDB"))
   .catch((err) => console.log(err));
 
