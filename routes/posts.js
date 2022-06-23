@@ -6,9 +6,9 @@ router.post("/", async (req, res) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
-    return res.status(200).json(savedPost);
+    return res.sendStatus(200).json(savedPost);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.sendStatus(500).json(error);
   }
 });
 
@@ -26,15 +26,15 @@ router.put("/:id", async (req, res) => {
           },
           { new: true }
         );
-        return res.status(200).json(updatedPost);
+        return res.sendStatus(200).json(updatedPost);
       } catch (err) {
-        return res.status(500).json(err);
+        return res.sendStatus(500).json(err);
       }
     } else {
-      return res.status(401).json("You can update only your post!");
+      return res.sendStatus(401).json("You can update only your post!");
     }
   } catch (err) {
-    return res.status(500).json(err);
+    return res.sendStatus(500).json(err);
   }
 });
 
@@ -46,24 +46,24 @@ router.delete("/:id", async (req, res) => {
     if (post.userName === req.body.userName) {
       try {
         await post.delete();
-        return res.status(200).json("Post has been deleted...");
+        return res.sendStatus(200).json("Post has been deleted...");
       } catch (err) {
-        return res.status(500).json(err);
+        return res.sendStatus(500).json(err);
       }
     } else {
-      return res.status(401).json("You can delete only your post!");
+      return res.sendStatus(401).json("You can delete only your post!");
     }
   } catch (err) {
-    return res.status(500).json(err);
+    return res.sendStatus(500).json(err);
   }
 });
 //Get Posts
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    return res.status(200).json(post);
+    return res.sendStatus(200).json(post);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.sendStatus(500).json(error);
   }
 });
 
@@ -81,9 +81,9 @@ router.get("/", async (req, res) => {
     } else {
       posts = await Post.find();
     }
-    return res.status(200).json(posts);
+    return res.sendStatus(200).json(posts);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.sendStatus(500).json(error);
   }
 });
 

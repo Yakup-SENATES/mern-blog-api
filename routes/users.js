@@ -6,7 +6,7 @@ const Post = require("../models/Post");
 //Update
 router.put("/:id", async (req, res) => {
   if (req.body.userId !== req.params.id) {
-    return res.status(401).json({ message: "Not Authorized" });
+    return res.sendStatus(401).json({ message: "Not Authorized" });
   } else {
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
@@ -21,9 +21,9 @@ router.put("/:id", async (req, res) => {
         },
         { new: true }
       );
-      return res.status(200).json(updateUser);
+      return res.sendStatus(200).json(updateUser);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.sendStatus(500).json(error);
     }
   }
 });
@@ -37,15 +37,15 @@ router.delete("/:id", async (req, res) => {
       try {
         await Post.deleteMany({ userName: user.userName });
         await User.findByIdAndDelete(req.params.id);
-        return res.status(200).json("User has been deleted...");
+        return res.sendStatus(200).json("User has been deleted...");
       } catch (err) {
-        return res.status(500).json(err);
+        return res.sendStatus(500).json(err);
       }
     } catch (err) {
-      return res.status(404).json("User not found!");
+      return res.sendStatus(404).json("User not found!");
     }
   } else {
-    return res.status(401).json("You can delete only your account!");
+    return res.sendStatus(401).json("You can delete only your account!");
   }
 });
 
@@ -54,9 +54,9 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { password, ...others } = user._doc;
-    return res.status(200).json(others);
+    return res.sendStatus(200).json(others);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.sendStatus(500).json(error);
   }
 });
 

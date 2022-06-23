@@ -36,7 +36,7 @@ const upload = multer({
 });
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  return res.status(200).json({ message: "Image uploaded successfully" });
+  return res.sendStatus(200).json({ message: "Image uploaded successfully" });
 });
 
 app.use("/api/auth", authRoute);
